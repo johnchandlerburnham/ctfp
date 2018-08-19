@@ -4,6 +4,8 @@ title: "Notes: Category Theory for Programmers by Bartosz Milewski"
 
 # Contents
 
+![](/images/hpfp-cover.png)
+
 ----
 
 -  **Completed**
@@ -19,8 +21,8 @@ title: "Notes: Category Theory for Programmers by Bartosz Milewski"
 - [Chapter 3: Categories Great and Small](/projects/ctfp/03.html)
 - [Chapter 4: Kleisli Categories](/projects/ctfp/04.html)
 - [Chapter 5: Products and Coproducts](/projects/ctfp/05.html)
-- Chapter 6: Simple Algebraic Data Types
-- Chapter 7: Functors
+- [Chapter 6: Simple Algebraic Data Types](/projects/ctfp/06.html)
+- [Chapter 7: Functors](/projects/ctfp/07.html)
 - Chapter 8: Functoriality
 - Chapter 9: Function Types
 - Chapter 10: Natural Transformations
