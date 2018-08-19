@@ -4,7 +4,7 @@ title: "Notes: Category Theory for Programmers by Bartosz Milewski"
 
 # Contents
 
-![](/images/hpfp-cover.png)
+![](/images/ctfp-cover.png)
 
 ----
 
