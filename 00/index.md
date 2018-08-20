@@ -1,5 +1,8 @@
 ---
 title: "Notes: Category Theory for Programmers by Bartosz Milewski"
+author: jcb
+date: 2017-12-15
+tags: notes, haskell, math, category-theory, ctfp
 ---
 
 
