@@ -235,7 +235,98 @@ safen :: Int -> Maybe Int
 safen x
   | x > 1 = Just x
   | otherwise = Nothing
+
+safeIsPrime x = isPrime <$> (safen x)
 ```
 
-safeIsPrime x= safen
+This `safen` function is essentially lifting our `Int` into a `Maybe Int` that's
+constrained to only have the values that `isPrime` can safely be applied to.
 
+## 7.4 Challenges
+
+### 1
+
+The functor laws are:
+
+```haskell
+fmap id = id
+fmap (g . f) = (fmap g) . (fmap f)
+```
+
+The proposed definition `fmap _ _ = Nothing` breaks the identity law, because it
+implies
+
+```
+fmap id (Just x) = Nothing /= id (Just x)
+```
+
+### 2
+
+The functor for Reader is:
+
+```haskell
+newtype Reader r a = Reader { run :: r -> a }
+fmap f (Reader g) = Reader $ f . g
+```
+
+`fmap id = id` because for all g `(id . g) = g`
+
+`fmap (g . f) = (fmap g) . (fmap f)` because
+
+```haskell
+fmap (g . f) (Reader r) = Reader $ (f . g) . r
+((fmap g) . (fmap f)) . (Reader r) = Reader $ f . (g . r)
+```
+
+function composition is associative, so
+
+```haskell
+(f . g) . r = f . (g . r)
+```
+
+### 3
+
+Pass, I'm really in this for the Haskell.
+
+### 4
+
+The functor instance for List
+
+```haskell
+data List a = Nil | Cons a (List a)
+instance Functor List where
+  fmap _ Nil = Nil
+  fmap f (Cons x t) = Cons (f x) (fmap f t)
+```
+
+By induction the first law `fmap id = id` works on a base case for `Nil`
+
+```haskell
+fmap id Nil = Nil = id Nil
+```
+
+and on the inductive step with `Cons`, that is,  assuming `fmap id t = id t`,
+
+```haskell
+fmap id (Cons x t) = Cons (id x) (fmap id t) = id (Cons x t)
+```
+
+The second functor law is the same
+
+```haskell
+fmap (g . f) Nil = Nil = ((fmap g) . (fmap f)) Nil
+fmap (g . f) (Cons x t) = Cons ((g . f) x) (fmap (g . f) t) 
+((fmap g) . (fmap f)) (Cons x t) = Cons ((g (f x)) ((fmap g) . (fmap f)) t)
+```
+
+Since the inductive step for `Cons` assumes
+
+```haskell
+fmap (g . f) t = ((fmap g) . (fmap f)) t
+```
+
+and `g (f x) = (g . f) x` by definition:
+
+```haskell
+fmap (g . f) (Cons x t) = ((fmap g) . (fmap f)) (Cons x t)
+```haskell
